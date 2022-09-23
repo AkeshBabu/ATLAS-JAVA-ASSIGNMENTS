@@ -103,7 +103,7 @@ public class Ques3_Assignment21 {
         Macbook macbook = new Macbook();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Would you like to upgrade your burger to a Item ? (yes/no)");
+        System.out.println("Would you like to upgrade your Macbook ? (yes/no)");
         String choice = scanner.nextLine();
         scanner.close();
 
