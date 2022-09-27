@@ -35,6 +35,23 @@ public class GovernmentApp {
 		}
 
 	}
+	void searchCrossing(){
+		//
+		System.out.println("enter crossing name:");
+		//String name=
+		Map<String, RailwayCrossing> crossings = (Map<String, RailwayCrossing>) controller.fetchCrossings();
+		Scanner scr=new Scanner(System.in);
+		String name=scr.nextLine();
+		for(String key : crossings.keySet()) {
+
+			if (crossings.get(key).getName().equalsIgnoreCase(name)){
+				System.out.println(key + "\nCrossing name:\n"+crossings.get(key).getName()+ "\nStatus:\n"+crossings.get(key).getStatus()+"\nSchedule:\n"+crossings.get(key).getSchedules());
+
+			}
+
+		}
+	}
+
 
 	void addCrossing() {
 
@@ -116,7 +133,7 @@ public class GovernmentApp {
 			System.out.println("4: Delete Railway Crossing");
 			System.out.println("5: Export Data");
 			System.out.println("6: Import Data");
-			System.out.println("7: Close Goverment Application");
+			System.out.println("7: Close Government Application");
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 			int choice = scanner.nextInt();
@@ -127,7 +144,7 @@ public class GovernmentApp {
 					break;
 
 				case 2:
-
+					searchCrossing();
 					break;
 
 				case 3:
@@ -135,6 +152,13 @@ public class GovernmentApp {
 					break;
 
 				case 4:
+					Map<String, RailwayCrossing> crossings = (Map<String, RailwayCrossing>) controller.fetchCrossings();
+					System.out.println("Enter the id of person in charge that you want  to delete");
+					Scanner scr=new Scanner(System.in);
+					String name=scr.nextLine();
+					//crossings.get(name);
+					controller.deleteCrossing(crossings.get(name));
+
 					break;
 
 				case 5:

@@ -96,11 +96,11 @@ public class PublicApp {
 		//String name=
 		Map<String, RailwayCrossing> crossings = (Map<String, RailwayCrossing>) railController.fetchCrossings();
 		Scanner scr=new Scanner(System.in);
-
+		String name=scr.nextLine();
 		for(String key : crossings.keySet()) {
-			String name=scr.nextLine();
+
 			if (crossings.get(key).getName().equalsIgnoreCase(name)){
-				System.out.println(key + "\nvalue at key:\n"+crossings.get(key).getName()+ crossings.get(key).getStatus()+crossings.get(key).getSchedules());
+				System.out.println(key + "\nCrossing name:\n"+crossings.get(key).getName()+ "\nStatus:\n"+crossings.get(key).getStatus()+"\nSchedule:\n"+crossings.get(key).getSchedules());
 
 			}
 
@@ -108,10 +108,49 @@ public class PublicApp {
 	}
 
 	void sort(){
-		//HashMap<Object, Object> hm = null;
-		//List<Map.Entry<String, Integer> > list =
-		//		new LinkedList<Map.Entry<String, Integer> >(hm.entrySet());
+		Map<String, RailwayCrossing> crossings = (Map<String, RailwayCrossing>) railController.fetchCrossings();
 
+		System.out.println("Before Sorting by Values -"
+				+ " as per insertion-order : \n");
+
+		// iterate original LinkedHashMap
+		for(Map.Entry<String, RailwayCrossing> lhmap :
+				crossings.entrySet()){
+			System.out.println("Key : "  + lhmap.getKey()
+					+ "\t\t" + "Value : "  + lhmap.getValue());
+		}
+
+		//  get entrySet from LinkedHashMap object
+		Set<Map.Entry<String, RailwayCrossing>> crossingsScheduleSet =
+				crossings.entrySet();
+
+
+		// convert LinkedHashMap to List of Map.Entry
+		List<Map.Entry<String, RailwayCrossing>> crossingScheduleListEntry =
+				new ArrayList<Map.Entry<String, RailwayCrossing>>(
+						crossingsScheduleSet);
+
+		//  sort list of entries using Collections class'
+		// utility method sort(ls, cmptr)
+		Collections.sort(crossingScheduleListEntry, Comparator.comparing(es -> es.getValue().getSchedules().values().toString()));
+
+		//  clear original LinkedHashMap
+		crossings.clear();
+
+		// iterating list and storing in LinkedHahsMap
+		for(Map.Entry<String, RailwayCrossing> map : crossingScheduleListEntry){
+			crossings.put(map.getKey(), map.getValue());
+		}
+
+		System.out.println("\n\nSorted Railway Crossing by its Schedule"
+				+ " in ascending-order\n");
+
+
+		//  iterate LinkedHashMap to retrieved stored values
+		for(Map.Entry<String, RailwayCrossing> lhmap : crossings.entrySet()){
+			System.out.println("Key : "  + lhmap.getKey()
+					+ "\t\t" + "Value : "  + lhmap.getValue());
+		}
 	}
 
 	void home() {
@@ -139,6 +178,7 @@ public class PublicApp {
 					break;
 
 				case 3:
+					sort();
 					break;
 
 				case 4:
