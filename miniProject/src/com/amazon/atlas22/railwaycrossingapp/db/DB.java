@@ -98,14 +98,14 @@ public class DB implements DAO{
 
         try {
 
-            File file = new File("/Users/ishant/Downloads/users-data");
+            File file = new File("/home/syedsheeazzaidi/Desktop/users-data\n");
             if(!file.exists()) {
                 file.mkdir();
                 System.out.println("Directory Created by the name of "+file.getName());
             }
 
             for(String key : users.keySet()) {
-                File userFile = new File("/Users/ishant/Downloads/users-data/", key+".txt");
+                File userFile = new File("/home/syedsheeazzaidi/Desktop/users-data\n", key+".txt");
                 FileOutputStream stream = new FileOutputStream(userFile);
                 ObjectOutputStream objectStream = new ObjectOutputStream(stream);
                 objectStream.writeObject(users.get(key));
@@ -124,11 +124,11 @@ public class DB implements DAO{
 
         try {
 
-            File file = new File("/Users/ishant/Downloads/users-data");
+            File file = new File("/home/syedsheeazzaidi/Desktop/users-data\n");
             String[] files = file.list(); // Get Name of all the files in the users-data directory :)
 
             for(String fileName : files) {
-                File userFile = new File("/Users/ishant/Downloads/users-data/", fileName);
+                File userFile = new File("/home/syedsheeazzaidi/Desktop/users-data\n", fileName);
                 FileInputStream stream = new FileInputStream(userFile);
                 ObjectInputStream objectStream = new ObjectInputStream(stream);
                 User user = (User) objectStream.readObject();

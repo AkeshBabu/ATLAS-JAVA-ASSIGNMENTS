@@ -1,7 +1,6 @@
 package com.amazon.atlas22.railwaycrossingapp;
 
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import com.amazon.atlas22.railwaycrossingapp.controller.RailwayCrossingController;
 import com.amazon.atlas22.railwaycrossingapp.controller.UserController;
@@ -91,6 +90,30 @@ public class PublicApp {
 		}
 	}
 
+	void searchCrossing(){
+		//
+		System.out.println("enter crossing name:");
+		//String name=
+		Map<String, RailwayCrossing> crossings = (Map<String, RailwayCrossing>) railController.fetchCrossings();
+		Scanner scr=new Scanner(System.in);
+
+		for(String key : crossings.keySet()) {
+			String name=scr.nextLine();
+			if (crossings.get(key).getName().equalsIgnoreCase(name)){
+				System.out.println(key + "\nvalue at key:\n"+crossings.get(key).getName()+ crossings.get(key).getStatus()+crossings.get(key).getSchedules());
+
+			}
+
+		}
+	}
+
+	void sort(){
+		//HashMap<Object, Object> hm = null;
+		//List<Map.Entry<String, Integer> > list =
+		//		new LinkedList<Map.Entry<String, Integer> >(hm.entrySet());
+
+	}
+
 	void home() {
 
 		while(true) {
@@ -112,6 +135,7 @@ public class PublicApp {
 
 				case 2:
 
+					searchCrossing();
 					break;
 
 				case 3:
